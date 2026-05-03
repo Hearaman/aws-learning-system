@@ -342,6 +342,13 @@
           >
             EC2 Masterclass
           </button>
+          <button
+            class="tab special"
+            data-filter="Masterclass"
+            onclick="document.getElementById('vpc-masterclass').scrollIntoView({ behavior: 'smooth' })"
+          >
+            VPC Masterclass
+          </button>
         </div>
       </div>
     </header>
@@ -451,6 +458,56 @@ systemctl start nginx</code></pre>
           </div>
         </div>
       </div>
+
+      <div class="masterclass" id="vpc-masterclass">
+        <h2>🎓 VPC Masterclass</h2>
+        <p>Deep dive into Amazon VPC using the same <strong>Node.js User Service</strong> architecture.</p>
+        <div class="mc-grid">
+          <div class="mc-card">
+            <h4>Core Building Blocks</h4>
+            <table>
+              <tr><th>Component</th><th>Purpose</th></tr>
+              <tr><td>VPC CIDR</td><td>Defines your private IP range, e.g. 10.0.0.0/16</td></tr>
+              <tr><td>Public Subnet</td><td>Has a route to an Internet Gateway</td></tr>
+              <tr><td>Private Subnet</td><td>No direct internet route; often uses NAT for egress</td></tr>
+              <tr><td>Route Table</td><td>Controls where subnet traffic goes</td></tr>
+              <tr><td>Security Group</td><td>Stateful instance or ENI firewall</td></tr>
+              <tr><td>NACL</td><td>Stateless subnet firewall</td></tr>
+            </table>
+          </div>
+          <div class="mc-card">
+            <h4>Best-Practice Layout</h4>
+            <ul>
+              <li>Put the <strong>ALB</strong> in two public subnets across two AZs.</li>
+              <li>Put <strong>EC2 app servers</strong> in private subnets.</li>
+              <li>Put <strong>RDS</strong> in private DB subnets with no public access.</li>
+              <li>Use <strong>NAT Gateway</strong> only for private subnet outbound internet access.</li>
+              <li>Use <strong>VPC Endpoints</strong> for private access to services like S3 and SSM.</li>
+            </ul>
+          </div>
+          <div class="mc-card">
+            <h4>Hands-On Lab: Node.js VPC</h4>
+            <pre><code><span class="cmt"># Public ALB, private app, private DB</span>
+resource "aws_vpc" "main" { cidr_block = "10.0.0.0/16" }
+resource "aws_subnet" "public_a"  { vpc_id = aws_vpc.main.id cidr_block = "10.0.1.0/24" }
+resource "aws_subnet" "private_a" { vpc_id = aws_vpc.main.id cidr_block = "10.0.11.0/24" }
+<span class="cmt"># Route 0.0.0.0/0 from public subnets to IGW</span>
+<span class="cmt"># Route 0.0.0.0/0 from private subnets to NAT Gateway</span>
+<span class="cmt"># EC2 SG allows 3000 only from ALB SG</span>
+<span class="cmt"># RDS SG allows 5432 only from EC2 SG</span></code></pre>
+          </div>
+          <div class="mc-card">
+            <h4>Exam Traps</h4>
+            <ul>
+              <li><strong>Public subnet</strong> means route to IGW, not just “has a public IP”.</li>
+              <li><strong>Security Groups</strong> are stateful; <strong>NACLs</strong> are stateless.</li>
+              <li><strong>NAT Gateway</strong> enables outbound internet from private subnets only.</li>
+              <li><strong>VPC Peering</strong> is non-transitive; Transit Gateway solves hub-and-spoke networking.</li>
+              <li><strong>Site-to-Site VPN</strong> is encrypted and fast to set up; <strong>Direct Connect</strong> is private but not encrypted by default.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
@@ -461,6 +518,8 @@ systemctl start nginx</code></pre>
           name: 'Amazon EC2',
           icon: '🖥️',
           badges: ['CCP', 'SAA-C03'],
+          masterclassId: 'ec2-masterclass',
+          masterclassLabel: 'EC2 Masterclass',
           useCase: 'Hosting Node.js APIs.',
           whatItIs: 'Virtual servers in the cloud.',
           whyChoose: 'Full OS-level access, custom software.',
@@ -636,22 +695,36 @@ systemctl start nginx</code></pre>
           layer: 'Network',
           name: 'Amazon VPC',
           icon: '🕸️',
-          badges: ['CCP', 'SAA-C03'],
-          useCase: 'Isolated network for architecture.',
-          whatItIs: 'Virtual Private Cloud.',
-          whyChoose: 'Mandatory network foundation.',
-          decisionShortcut: 'Network boundary for AWS.',
-          keyConcepts: 'Subnets, IGW, NAT, Route Tables.',
-          pricing: 'Free (pay for NAT/EIP).',
-          security: 'SGs, NACLs.',
-          handsOn: 'Create VPC with public/private subnets.',
-          examTips: ['Private subnet needs NAT for internet.'],
-          pitfalls: 'Overlapping CIDRs.',
-          whenNotToUse: 'N/A.',
-          limits: '5 VPCs/region. Max /16 CIDR.',
-          consolePath: 'VPC',
-          related: ['EC2'],
-          code: `resource "aws_vpc" "main" { cidr_block = "10.0.0.0/16" }`,
+          badges: ['CCP', 'SAA-C03', 'Hands-on'],
+          masterclassId: 'vpc-masterclass',
+          masterclassLabel: 'VPC Masterclass',
+          useCase: 'Building a production network for a public ALB, private Node.js app servers, and private RDS.',
+          whatItIs: 'A logically isolated virtual network where you define IP ranges, subnets, routes, and traffic controls for AWS resources.',
+          whyChoose: 'VPC is the foundation for secure multi-tier architectures, hybrid networking, private databases, and controlled east-west traffic.',
+          decisionShortcut: 'Choose VPC whenever you need network isolation, subnet design, controlled internet access, or hybrid connectivity.',
+          keyConcepts: 'CIDR blocks, public vs private subnets, route tables, Internet Gateway, NAT Gateway, Security Groups, NACLs, VPC Endpoints, Peering, Transit Gateway, VPN.',
+          pricing: 'The VPC itself is free; you mainly pay for NAT Gateways, Elastic IPs, VPC endpoints, VPNs, and traffic processing.',
+          security: 'Use Security Groups for stateful resource-level rules, NACLs for stateless subnet rules, and keep app/database tiers in private subnets whenever possible.',
+          handsOn: 'Create one VPC across two AZs, place the ALB in public subnets, EC2 app servers in private subnets, RDS in DB subnets, then add an S3 gateway endpoint and a Site-to-Site VPN for operator access.',
+          examTips: ['A subnet is public only if its route table sends 0.0.0.0/0 to an Internet Gateway.', 'Private subnets need a NAT Gateway for outbound internet access.', 'Security Groups are stateful; NACLs are stateless.', 'VPC Peering is non-transitive.', 'Use VPC Endpoints to reach AWS services privately.'],
+          pitfalls: 'Creating overlapping CIDR ranges, putting databases in public subnets, or assuming NAT Gateway allows inbound traffic.',
+          whenNotToUse: 'You do not usually think in VPC terms for globally managed services like Route 53 or CloudFront, but almost all regional compute/database designs still depend on VPC architecture.',
+          limits: 'Default: 5 VPCs per region, /16 largest primary IPv4 CIDR, 200 subnets per VPC, and route/security quotas vary by account and can often be increased.',
+          consolePath: 'VPC > Your VPCs / Subnets / Route Tables / Internet Gateways',
+          related: ['EC2', 'ALB', 'RDS', 'NAT Gateway', 'VPN'],
+          code: `resource "aws_vpc" "main" {
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_hostnames = true
+}
+resource "aws_subnet" "public_a" {
+  vpc_id                  = aws_vpc.main.id
+  cidr_block              = "10.0.1.0/24"
+  map_public_ip_on_launch = true
+}
+resource "aws_subnet" "private_a" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.11.0/24"
+}`,
         },
         {
           id: 'cloudfront',
@@ -898,25 +971,25 @@ systemctl start nginx</code></pre>
       }
 
       function showDetail(svc) {
-        const isEC2 = svc.id === 'ec2';
         document.getElementById('detail').innerHTML = `
     <div class="dp-header">
       <div class="svc-layer" style="margin-bottom:4px;">${svc.layer}</div>
       <h3>${svc.icon} ${svc.name}</h3>
       <div class="tags">${svc.badges.map((b) => `<span class="tag">${b}</span>`).join('')}</div>
-      ${isEC2 ? '<a href="#ec2-masterclass" class="btn-scroll">Jump to EC2 Masterclass &darr;</a>' : ''}
+      ${svc.masterclassId ? `<a href="#${svc.masterclassId}" class="btn-scroll">Jump to ${svc.masterclassLabel} &darr;</a>` : ''}
     </div>
     <div class="dp-body">
       <div class="decision-shortcut"><strong>Shortcut:</strong> ${svc.decisionShortcut}</div>
       
       <div class="detail-section">
-        <h4>What it is & Why choose it</h4>
+        <h4>Use Case, What It Is & Why Choose It</h4>
+        <p><strong>Use case:</strong> ${svc.useCase}</p>
         <p>${svc.whatItIs}</p>
         <p>${svc.whyChoose}</p>
       </div>
 
       <div class="detail-section">
-        <h4>Key Concepts & Pricing</h4>
+        <h4>Key Concepts, Pricing & Security</h4>
         <p><strong>Concepts:</strong> ${svc.keyConcepts}</p>
         <p><strong>Pricing:</strong> ${svc.pricing}</p>
         <p><strong>Security:</strong> ${svc.security}</p>
@@ -933,6 +1006,7 @@ systemctl start nginx</code></pre>
       <div class="detail-section">
         <h4>Hands-on Idea</h4>
         <p>${svc.handsOn}</p>
+        <p><strong>Related:</strong> ${svc.related.join(', ')}</p>
         <p><em>Path:</em> ${svc.consolePath}</p>
         <pre><code>${highlightCode(svc.code)}</code></pre>
       </div>
