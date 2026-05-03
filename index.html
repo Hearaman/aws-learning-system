@@ -14,16 +14,11 @@
         --orange: #ff9900;
         --blue: #38bdf8;
         --green: #34d399;
-        --purple: #a78bfa;
-        --red: #ef4444;
-        --yellow: #facc15;
-        --radius: 12px;
+        --radius: 8px;
       }
-
       * {
         box-sizing: border-box;
       }
-
       body {
         margin: 0;
         font-family:
@@ -32,17 +27,16 @@
           sans-serif;
         background: var(--bg);
         color: var(--text);
-        line-height: 1.6;
+        line-height: 1.5;
         overflow-x: hidden;
       }
-
       header {
         position: sticky;
         top: 0;
         background: rgba(11, 24, 39, 0.95);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
         border-bottom: 1px solid var(--border);
-        padding: 15px 20px;
+        padding: 10px 20px;
         z-index: 100;
       }
       .header-content {
@@ -52,16 +46,16 @@
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
       }
       .brand h1 {
         margin: 0;
-        font-size: 20px;
+        font-size: 18px;
         color: var(--orange);
       }
       .brand p {
         margin: 0;
-        font-size: 13px;
+        font-size: 12px;
         color: var(--muted);
       }
 
@@ -74,16 +68,21 @@
         background: var(--bg);
         border: 1px solid var(--border);
         color: var(--muted);
-        padding: 6px 14px;
+        padding: 4px 12px;
         border-radius: 20px;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 12px;
         transition: 0.2s;
       }
       .tab.active,
       .tab:hover {
         border-color: var(--orange);
         color: var(--orange);
+      }
+      .tab.special {
+        border-color: rgba(255, 153, 0, 0.5);
+        color: var(--orange);
+        background: rgba(255, 153, 0, 0.05);
       }
 
       .container {
@@ -92,35 +91,64 @@
         padding: 0 20px;
       }
 
-      .card {
+      .hero-card,
+      .toolbar {
         background: var(--panel);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 24px;
-        margin-bottom: 20px;
+        padding: 16px;
+        margin-bottom: 16px;
       }
-      .card h2 {
+      .hero-card h2 {
         margin-top: 0;
         color: var(--orange);
+        font-size: 20px;
+      }
+      .hero-card p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+
+      .toolbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+      .search-box input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--bg);
+        color: var(--text);
+        outline: none;
+        width: 300px;
+      }
+      .search-box input:focus {
+        border-color: var(--orange);
+      }
+      .result-count {
+        font-size: 12px;
+        color: var(--blue);
       }
 
       .layout-grid {
         display: grid;
-        grid-template-columns: 1fr 450px;
+        grid-template-columns: 1fr 400px;
         gap: 20px;
         align-items: start;
       }
-
       .service-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
       }
+
       .svc-card {
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.02);
         border: 1px solid var(--border);
         border-radius: 8px;
-        padding: 16px;
+        padding: 12px;
         cursor: pointer;
         transition: 0.2s;
         display: flex;
@@ -129,104 +157,86 @@
       .svc-card:hover,
       .svc-card.active {
         border-color: var(--orange);
-        transform: translateY(-2px);
         background: rgba(255, 153, 0, 0.05);
+        transform: translateY(-2px);
       }
       .svc-header {
+        font-weight: bold;
+        margin-bottom: 6px;
+        font-size: 14px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-weight: bold;
-        margin-bottom: 8px;
-        font-size: 16px;
+        gap: 6px;
       }
       .svc-layer {
         font-size: 10px;
         text-transform: uppercase;
         color: var(--blue);
-        margin-bottom: 8px;
-        letter-spacing: 0.05em;
+        margin-bottom: 6px;
       }
       .svc-desc {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--muted);
-        flex-grow: 1;
         margin: 0;
       }
 
       .detail-panel {
         position: sticky;
-        top: 90px;
+        top: 80px;
         background: var(--panel);
         border: 1px solid var(--border);
         border-radius: var(--radius);
-        padding: 24px;
-        max-height: calc(100vh - 110px);
+        padding: 20px;
+        max-height: calc(100vh - 100px);
         overflow-y: auto;
       }
-      .detail-panel::-webkit-scrollbar {
-        width: 6px;
-      }
-      .detail-panel::-webkit-scrollbar-thumb {
-        background: #374151;
-        border-radius: 4px;
-      }
       .detail-panel h3 {
-        margin-top: 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 24px;
-        color: #fff;
+        margin: 0 0 10px 0;
+        font-size: 20px;
         border-bottom: 1px solid var(--border);
-        padding-bottom: 12px;
+        padding-bottom: 10px;
       }
-      .use-case-box {
+      .decision-shortcut {
         background: rgba(255, 153, 0, 0.1);
-        border-left: 4px solid var(--orange);
-        padding: 12px 16px;
-        margin: 16px 0;
-        font-size: 14px;
-        border-radius: 0 4px 4px 0;
+        border-left: 3px solid var(--orange);
+        padding: 8px 12px;
+        margin: 10px 0;
+        font-size: 13px;
       }
       .detail-section {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
+        font-size: 13px;
       }
       .detail-section h4 {
         margin: 0 0 4px 0;
         color: var(--blue);
         font-size: 12px;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
       }
       .detail-section p,
       .detail-section ul {
-        margin: 0;
-        font-size: 13px;
-        color: var(--text);
-      }
-      .detail-section ul {
+        margin: 0 0 4px 0;
         padding-left: 20px;
       }
 
       .tags {
         display: flex;
         flex-wrap: wrap;
-        gap: 6px;
-        margin-top: 6px;
+        gap: 4px;
+        margin-top: 4px;
       }
       .tag {
         background: rgba(255, 255, 255, 0.1);
-        padding: 2px 8px;
+        padding: 2px 6px;
         border-radius: 4px;
-        font-size: 11px;
+        font-size: 10px;
       }
 
       pre {
-        background: #0d1117;
+        background: #05080f;
         border: 1px solid var(--border);
         padding: 12px;
-        border-radius: 8px;
+        border-radius: 6px;
         overflow-x: auto;
         font-size: 12px;
         color: #c9d1d9;
@@ -234,88 +244,77 @@
       }
       .kw {
         color: #ff7b72;
-        font-weight: bold;
       }
       .str {
         color: #a5d6ff;
       }
       .cmt {
         color: #8b949e;
-        font-style: italic;
       }
 
-      /* Masterclass */
       .masterclass {
         margin-top: 40px;
         padding-top: 20px;
-        border-top: 2px dashed var(--border);
-        scroll-margin-top: 90px;
+        border-top: 2px dashed rgba(255, 153, 0, 0.3);
+        scroll-margin-top: 80px;
       }
       .mc-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-top: 20px;
+        gap: 16px;
+        margin-top: 16px;
       }
       .mc-card {
         background: rgba(255, 255, 255, 0.02);
         border: 1px solid var(--border);
         border-radius: 8px;
-        padding: 20px;
+        padding: 16px;
+        font-size: 13px;
       }
       .mc-card h4 {
         color: var(--orange);
         margin-top: 0;
+        margin-bottom: 8px;
         border-bottom: 1px solid var(--border);
-        padding-bottom: 8px;
+        padding-bottom: 4px;
       }
-      .mc-card p,
-      .mc-card ul {
-        font-size: 13px;
-        color: var(--muted);
-      }
-      .mc-card ul {
-        padding-left: 20px;
-      }
-
       table {
         width: 100%;
         border-collapse: collapse;
         font-size: 12px;
-        margin-top: 10px;
+        margin-top: 8px;
       }
       th,
       td {
-        padding: 8px;
+        padding: 6px;
         border: 1px solid var(--border);
         text-align: left;
-        color: var(--text);
       }
       th {
         background: rgba(255, 255, 255, 0.05);
         color: var(--blue);
       }
 
-      footer {
-        text-align: center;
-        padding: 40px 20px;
-        color: var(--muted);
-        font-size: 13px;
-        border-top: 1px solid var(--border);
-        margin-top: 40px;
+      .btn-scroll {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 6px 12px;
+        background: rgba(255, 153, 0, 0.2);
+        border: 1px solid var(--orange);
+        color: var(--orange);
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        text-decoration: none;
       }
-
-      @media (max-width: 1024px) {
-        .layout-grid {
-          grid-template-columns: 1fr;
-        }
+      @media (max-width: 900px) {
+        .layout-grid,
         .mc-grid {
           grid-template-columns: 1fr;
         }
         .detail-panel {
           position: static;
           max-height: none;
-          margin-top: 20px;
         }
       }
     </style>
@@ -336,7 +335,11 @@
           <button class="tab" data-filter="Security">Security</button>
           <button class="tab" data-filter="Analytics">Analytics</button>
           <button class="tab" data-filter="Messaging">Messaging</button>
-          <button class="tab" data-filter="Masterclass" style="border-color: var(--orange); color: var(--orange)">
+          <button
+            class="tab special"
+            data-filter="Masterclass"
+            onclick="document.getElementById('ec2-masterclass').scrollIntoView({ behavior: 'smooth' })"
+          >
             EC2 Masterclass
           </button>
         </div>
@@ -344,266 +347,111 @@
     </header>
 
     <main class="container">
-      <div class="card">
-        <h2>AWS Exam Prep & Hands-On Guide</h2>
+      <div class="hero-card">
+        <h2>AWS Certification & Hands-On Study Guide</h2>
         <p>
-          Welcome to a comprehensive service-by-service study guide designed for the AWS Certified Cloud Practitioner
-          (CCP) and Solutions Architect Associate (SAA-C03) exams. Select any service below to explore its exam focus,
-          pricing, security models, and hands-on usage.
+          Targeting <strong>AWS Certified Cloud Practitioner (CCP)</strong> and
+          <strong>Solutions Architect Associate (SAA-C03)</strong> exams.
         </p>
         <p>
-          <em>Running Example:</em> Throughout this guide and the deep-dive masterclasses, we will use a generic
-          <strong>Node.js User Service</strong> to demonstrate how these AWS components tie together.
+          <em>Running Example:</em> We use a generic <strong>Node.js User Service</strong> to demonstrate real-world
+          component integration.
         </p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search services (e.g., 'EC2', 'database')..." />
+        </div>
+        <div class="result-count" id="resultCount">Loading...</div>
       </div>
 
       <div class="layout-grid">
         <div class="service-grid" id="grid"></div>
         <div class="detail-panel" id="detail">
-          <p style="color: var(--muted)">Select a service to view comprehensive details.</p>
+          <p style="color: var(--muted)">Select a service...</p>
         </div>
       </div>
 
       <div class="masterclass" id="ec2-masterclass">
-        <div class="card">
-          <h2 style="margin-bottom: 20px">🎓 EC2 Masterclass</h2>
-          <p>
-            Deep dive into Amazon EC2 using our <strong>Node.js User Service</strong> as the practical example. EC2
-            forms the backbone of AWS compute and is heavily tested across all AWS certifications.
-          </p>
-
-          <div class="mc-grid">
-            <div class="mc-card">
-              <h4>Why EC2 Matters in Exams</h4>
-              <p>
-                Exams test your ability to select the most cost-effective and performant compute option. You must know
-                when to use EC2 vs Serverless (Lambda), how to secure it, and how to scale it using ASGs and ELBs.
-              </p>
-            </div>
-
-            <div class="mc-card">
-              <h4>EC2 Naming Explained</h4>
-              <p>Example: <strong>m7g.large</strong></p>
-              <ul>
-                <li><strong>m</strong> = Instance Family (General Purpose)</li>
-                <li><strong>7</strong> = Generation (newer is usually better/cheaper)</li>
-                <li><strong>g</strong> = Additional capability (Graviton/ARM processor)</li>
-                <li><strong>large</strong> = Instance Size (determines vCPU and RAM)</li>
-              </ul>
-            </div>
-
-            <div class="mc-card">
-              <h4>Instance Families</h4>
-              <div style="overflow-x: auto">
-                <table>
-                  <tr>
-                    <th>Prefix</th>
-                    <th>Family Name</th>
-                    <th>Best For</th>
-                  </tr>
-                  <tr>
-                    <td><strong>T, M, Mac</strong></td>
-                    <td>General Purpose</td>
-                    <td>Web servers, microservices, code repos</td>
-                  </tr>
-                  <tr>
-                    <td><strong>C</strong></td>
-                    <td>Compute Optimized</td>
-                    <td>High-perf web servers, batch processing</td>
-                  </tr>
-                  <tr>
-                    <td><strong>R, X, z</strong></td>
-                    <td>Memory Optimized</td>
-                    <td>Databases, Redis caches, big data</td>
-                  </tr>
-                  <tr>
-                    <td><strong>I, D, H</strong></td>
-                    <td>Storage Optimized</td>
-                    <td>Data warehousing, Elasticsearch, Kafka</td>
-                  </tr>
-                  <tr>
-                    <td><strong>P, G, Inf, Trn</strong></td>
-                    <td>Accelerated Compute</td>
-                    <td>Machine learning, 3D graphics rendering</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-
-            <div class="mc-card">
-              <h4>Pricing Models</h4>
-              <div style="overflow-x: auto">
-                <table>
-                  <tr>
-                    <th>Model</th>
-                    <th>When to use</th>
-                    <th>Exam Tip</th>
-                  </tr>
-                  <tr>
-                    <td><strong>On-Demand</strong></td>
-                    <td>Unpredictable, short-term</td>
-                    <td>Most expensive, pay by second</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Reserved (RI)</strong></td>
-                    <td>Steady-state, 1-3 yr commit</td>
-                    <td>Can reserve capacity in a specific AZ</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Savings Plans</strong></td>
-                    <td>Consistent compute spend</td>
-                    <td>Applies across EC2, Fargate, Lambda</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Spot</strong></td>
-                    <td>Batch jobs, fault-tolerant</td>
-                    <td>Up to 90% off. Reclaimable w/ 2 min warning</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Dedicated</strong></td>
-                    <td>Strict licensing needs</td>
-                    <td>Physical server fully dedicated to you</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-
-            <div class="mc-card">
-              <h4>Core Concepts</h4>
-              <div style="overflow-x: auto">
-                <table>
-                  <tr>
-                    <th>Concept</th>
-                    <th>Definition</th>
-                  </tr>
-                  <tr>
-                    <td><strong>AMI</strong></td>
-                    <td>Amazon Machine Image (OS template)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>EBS</strong></td>
-                    <td>Elastic Block Store (network-attached persistent drive)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Security Group</strong></td>
-                    <td>Stateful firewall at the instance/ENI level</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Key Pair</strong></td>
-                    <td>Public/Private key used for SSH/Windows access</td>
-                  </tr>
-                  <tr>
-                    <td><strong>User Data</strong></td>
-                    <td>Script run exactly once during the first boot cycle</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-
-            <div class="mc-card">
-              <h4>Secure Access Options</h4>
-              <div style="overflow-x: auto">
-                <table>
-                  <tr>
-                    <th>Method</th>
-                    <th>Description</th>
-                  </tr>
-                  <tr>
-                    <td><strong>SSH (Port 22)</strong></td>
-                    <td>Requires opening port 22 in SG. Not recommended for prod.</td>
-                  </tr>
-                  <tr>
-                    <td><strong>SSM Session Mgr</strong></td>
-                    <td><strong>AWS Best Practice.</strong> Secure shell, no inbound ports required.</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Bastion Host</strong></td>
-                    <td>A public EC2 instance used solely to jump into private instances.</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
+        <h2>🎓 EC2 Masterclass</h2>
+        <p>Deep dive into Amazon EC2 using our <strong>Node.js User Service</strong>.</p>
+        <div class="mc-grid">
+          <div class="mc-card">
+            <h4>Naming & Families</h4>
+            <p><strong>m7g.large</strong>: m=General, 7=Gen, g=Graviton/ARM, large=Size</p>
+            <table>
+              <tr>
+                <th>Prefix</th>
+                <th>Family</th>
+                <th>Best For</th>
+              </tr>
+              <tr>
+                <td>T, M</td>
+                <td>General</td>
+                <td>Web servers, balanced</td>
+              </tr>
+              <tr>
+                <td>C</td>
+                <td>Compute</td>
+                <td>High-perf batch, APIs</td>
+              </tr>
+              <tr>
+                <td>R</td>
+                <td>Memory</td>
+                <td>Databases, Redis</td>
+              </tr>
+            </table>
           </div>
-
-          <h3 style="color: var(--blue); margin-top: 40px">Lab: Deploying the Node.js User Service</h3>
-          <p>
-            Let's deploy our running example to a single EC2 instance manually to understand the underlying
-            infrastructure.
-          </p>
-
-          <div class="mc-grid">
-            <div class="mc-card">
-              <h4>1. Create Security Group</h4>
-              <p>We need port 80 for NGINX and port 22 for initial SSH.</p>
-              <pre><code><span class="kw">aws</span> ec2 create-security-group \
-  --group-name node-app-sg \
-  --description <span class="str">"Node.js App"</span>
-
-<span class="cmt"># Allow HTTP</span>
-<span class="kw">aws</span> ec2 authorize-security-group-ingress \
-  --group-name node-app-sg \
-  --protocol tcp --port 80 \
-  --cidr 0.0.0.0/0</code></pre>
-            </div>
-
-            <div class="mc-card">
-              <h4>2. Launch Instance with User Data</h4>
-              <p>We use User Data to bootstrap the server and install dependencies.</p>
-              <pre><code><span class="kw">aws</span> ec2 run-instances \
-  --image-id ami-0123456789 \
-  --instance-type t3.micro \
-  --security-groups node-app-sg \
-  --user-data file://startup.sh</code></pre>
-            </div>
-
-            <div class="mc-card" style="grid-column: 1 / -1">
-              <h4>3. The startup.sh Script</h4>
-              <pre><code><span class="cmt">#!/bin/bash</span>
-yum update -y
-curl -fsSL https://rpm.nodesource.com/setup_18.x | bash -
+          <div class="mc-card">
+            <h4>Pricing Models</h4>
+            <table>
+              <tr>
+                <th>Model</th>
+                <th>When to use</th>
+              </tr>
+              <tr>
+                <td>On-Demand</td>
+                <td>Unpredictable, short-term</td>
+              </tr>
+              <tr>
+                <td>Savings Plans</td>
+                <td>Consistent compute spend (1-3 yr)</td>
+              </tr>
+              <tr>
+                <td>Spot</td>
+                <td>Batch jobs, fault-tolerant (90% off)</td>
+              </tr>
+            </table>
+          </div>
+          <div class="mc-card">
+            <h4>Lab: Node.js User Service</h4>
+            <pre><code><span class="cmt"># 1. SG: Inbound 80 (HTTP)</span>
+aws ec2 authorize-security-group-ingress --group-name app-sg --protocol tcp --port 80 --cidr 0.0.0.0/0
+<span class="cmt"># 2. Launch with User Data</span>
+aws ec2 run-instances --image-id ami-123 --instance-type t3.micro --user-data file://script.sh
+<span class="cmt"># Inside script.sh:</span>
 yum install -y nodejs nginx
 npm install -g pm2
-
-mkdir -p /app && cd /app
-cat &lt;EOF &gt; server.js
-const express = require('express');
-const app = express();
-app.get('/users', (req, res) => res.json([{id: 1, name: "Alice"}]));
-app.listen(3000);
-EOF
-
-npm install express
-pm2 start server.js --name "user-service"
-
-<span class="cmt"># Configure NGINX reverse proxy (port 80 -> 3000) inside nginx.conf...</span>
-systemctl start nginx && systemctl enable nginx</code></pre>
-            </div>
+pm2 start app.js --name "user-service"
+systemctl start nginx</code></pre>
           </div>
-
-          <div class="mc-card" style="margin-top: 20px">
-            <h4>Troubleshooting & Exam Reminders</h4>
+          <div class="mc-card">
+            <h4>Exam Traps & Troubleshooting</h4>
             <ul>
-              <li><strong>Timeout:</strong> Usually Security Group (port 80/443 closed) or missing Public IP.</li>
               <li>
-                <strong>Connection refused:</strong> OS firewall blocking, or web server (NGINX/Node) not listening on
-                0.0.0.0.
+                <strong>Trap:</strong> Root volumes are deleted on termination by default. Instance store is lost on
+                stop.
               </li>
-              <li><strong>Security Groups</strong> are stateful. <strong>NACLs</strong> are stateless.</li>
-              <li>
-                By default, root EBS volumes are deleted when an instance is terminated (`DeleteOnTermination=true`).
-              </li>
-              <li>Stopping an instance keeps EBS data but loses Instance Store (ephemeral) data.</li>
+              <li><strong>Trap:</strong> Changing instance type requires stopping the instance.</li>
+              <li><strong>Ports:</strong> 22 (SSH), 80/443 (HTTP/S), 3000 (Node app), 5432 (RDS).</li>
+              <li><strong>Timeout:</strong> Check Security Groups.</li>
+              <li><strong>Refused:</strong> Check app/OS firewall.</li>
             </ul>
           </div>
         </div>
       </div>
     </main>
-
-    <footer>
-      <p>
-        Next lesson can continue from this <strong>Node.js User Service</strong> into S3, RDS, VPC, IAM, ALB, or Lambda.
-      </p>
-    </footer>
 
     <script>
       const services = [
@@ -612,752 +460,512 @@ systemctl start nginx && systemctl enable nginx</code></pre>
           layer: 'Compute',
           name: 'Amazon EC2',
           icon: '🖥️',
-          useCase: 'Hosting backend Node.js APIs, legacy monoliths, and databases.',
-          whatItIs: 'Virtual servers in the cloud offering resizable compute capacity.',
-          whyChoose:
-            'When you need full OS-level access, custom software installations, or specific hardware (GPU/Graviton).',
-          keyConcepts: 'AMI, Instance Families, EBS Volumes, User Data, Spot/Reserved Pricing',
-          pricing: 'Pay per second. On-Demand, Reserved/Savings Plans (discount), Spot (cheap/interruptible).',
-          security: 'Protected by stateful Security Groups. Connect securely using SSM Session Manager instead of SSH.',
-          handsOn: 'Use User Data to install Node.js and PM2 on boot, start an Express app, and proxy via NGINX.',
-          examTips: [
-            'Know the difference between Spot, On-Demand, and Dedicated Hosts.',
-            'Root volumes are deleted on termination by default.',
-          ],
-          pitfalls: 'Opening port 22 to 0.0.0.0/0. Leaving unneeded Elastic IPs allocated (they cost money when idle).',
-          related: ['Auto Scaling Group', 'EBS', 'ALB'],
-          code: `aws ec2 run-instances \\
-  --image-id ami-0abcdef1234567890 \\
-  --instance-type t3.micro \\
-  --security-group-ids sg-12345 \\
-  --user-data file://startup.sh`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Hosting Node.js APIs.',
+          whatItIs: 'Virtual servers in the cloud.',
+          whyChoose: 'Full OS-level access, custom software.',
+          decisionShortcut: 'Choose EC2 for absolute OS control.',
+          keyConcepts: 'AMI, Families, User Data.',
+          pricing: 'Pay per second.',
+          security: 'Security Groups, SSM.',
+          handsOn: 'Use User Data to install Node.js/PM2.',
+          examTips: ['Root volumes deleted on termination.'],
+          pitfalls: 'Opening port 22 to 0.0.0.0/0.',
+          whenNotToUse: 'Event-driven scripts (Lambda).',
+          limits: '20 On-Demand instances per region.',
+          consolePath: 'EC2 > Instances',
+          related: ['ASG', 'EBS'],
+          code: `aws ec2 run-instances --image-id ami-123 --instance-type t3.micro`,
         },
         {
           id: 'asg',
           layer: 'Compute',
           name: 'Auto Scaling Group',
           icon: '📈',
-          useCase: 'Dynamically scaling the Node.js User Service from 2 to 10 instances.',
-          whatItIs: 'Automatically adds or removes EC2 instances based on defined conditions.',
-          whyChoose:
-            'To ensure high availability, fault tolerance across AZs, and cost optimization during low traffic.',
-          keyConcepts: 'Launch Templates, Desired/Min/Max Capacity, Target Tracking Policies',
-          pricing: 'ASG itself is free. You pay for the EC2 instances it provisions.',
-          security: 'Automatically assigns the Security Groups defined in the Launch Template.',
-          handsOn: 'Create a Launch Template, set an ASG across 3 private subnets, and attach to an ALB Target Group.',
-          examTips: [
-            'Health check grace period prevents premature termination of booting instances.',
-            'ASG terminates unhealthy instances automatically.',
-          ],
-          pitfalls: 'Storing sessions locally on an ASG instance. Use DynamoDB or ElastiCache instead.',
-          related: ['EC2', 'ALB', 'CloudWatch'],
-          code: `resource "aws_autoscaling_group" "api_asg" {
-  vpc_zone_identifier = [subnet1, subnet2]
-  desired_capacity    = 2
-  max_size            = 10
-  min_size            = 2
-  target_group_arns   = [aws_lb_target_group.api.arn]
-}`,
+          badges: ['SAA-C03'],
+          useCase: 'Scaling Node.js Service from 2 to 10 instances.',
+          whatItIs: 'Automatically adds/removes EC2s.',
+          whyChoose: 'High availability, cost optimization.',
+          decisionShortcut: 'Choose ASG for EC2 fleets behind ALB.',
+          keyConcepts: 'Launch Templates, Desired Capacity.',
+          pricing: 'Free (pay for EC2).',
+          security: 'Inherits SG.',
+          handsOn: 'Create Launch Template, attach to ALB.',
+          examTips: ['Terminates unhealthy instances automatically.'],
+          pitfalls: 'Storing state locally on ASG instance.',
+          whenNotToUse: 'Stateful non-replicated DBs.',
+          limits: 'Account EC2 limits apply.',
+          consolePath: 'EC2 > Auto Scaling',
+          related: ['EC2', 'ALB'],
+          code: `resource "aws_autoscaling_group" "app" { desired_capacity = 2 }`,
         },
         {
           id: 'lambda',
           layer: 'Compute',
           name: 'AWS Lambda',
           icon: 'λ',
-          useCase: 'Running a stateless thumbnail generator function.',
-          whatItIs: 'Serverless compute service that runs code in response to events.',
-          whyChoose: 'For short-lived, event-driven workloads with zero server management and zero idle cost.',
-          keyConcepts: 'Triggers, Execution Role, Layers, Concurrency Limits',
-          pricing: 'Billed per 1ms of execution time and requests. Generous free tier.',
-          security: 'Executes with an IAM Execution Role. Can be attached to a VPC to access private RDS.',
-          handsOn: 'Write a Node.js Lambda triggered by S3 `ObjectCreated` to resize images.',
-          examTips: ['Max execution time is 15 minutes.', 'Memory allocation determines CPU performance.'],
-          pitfalls: 'Cold starts causing latency. Putting Lambdas in VPCs unnecessarily increases cold start times.',
-          related: ['API Gateway', 'S3', 'EventBridge', 'SQS'],
-          code: `exports.handler = async (event) => {
-  console.log("Processing event:", JSON.stringify(event));
-  return { statusCode: 200, body: "Success" };
-};`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Thumbnail generation on image upload.',
+          whatItIs: 'Serverless event-driven compute.',
+          whyChoose: 'Zero server management, zero cost idle.',
+          decisionShortcut: 'Choose Lambda for short event logic.',
+          keyConcepts: 'Triggers, Execution Role, Cold Starts.',
+          pricing: 'Per 1ms.',
+          security: 'IAM Execution Role.',
+          handsOn: 'Node.js S3 trigger.',
+          examTips: ['15 min max duration.', 'Memory dictates CPU.'],
+          pitfalls: 'Hitting concurrency limits.',
+          whenNotToUse: 'Long-running tasks.',
+          limits: '1000 concurrent executions.',
+          consolePath: 'Lambda > Functions',
+          related: ['API Gateway', 'S3'],
+          code: `exports.handler = async (event) => { return { statusCode: 200 }; };`,
         },
         {
           id: 'ecs',
           layer: 'Compute',
           name: 'ECS / EKS',
           icon: '📦',
-          useCase: 'Deploying the Node.js User Service as a Docker container.',
-          whatItIs: 'Managed container orchestration services. ECS is AWS-native; EKS is Kubernetes.',
-          whyChoose: 'For microservices architectures, easy packaging, and consistent deployments.',
-          keyConcepts: 'Task Definitions, Clusters, Fargate (Serverless compute for containers)',
-          pricing: 'EC2 model (pay for underlying instances) or Fargate model (pay per vCPU/RAM per second).',
-          security: 'Tasks have their own IAM roles (Task Role) to securely access AWS resources.',
-          handsOn: 'Write a Dockerfile for the Node.js app, push to ECR, and deploy an ECS Service on Fargate.',
-          examTips: ['Fargate = serverless containers.', 'ECS uses Task Definitions, EKS uses Pods.'],
-          pitfalls:
-            'Confusing Task Execution Role (to pull images/logs) with Task Role (for the app to access S3/Dynamo).',
-          related: ['ECR', 'ALB', 'Fargate'],
-          code: `apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: node-user-service
-spec:
-  replicas: 3
-  template:
-    spec:
-      containers:
-        - name: app
-          image: my-account.dkr.ecr.region.amazonaws.com/user-service:latest`,
-        },
-        {
-          id: 'lightsail',
-          layer: 'Compute',
-          name: 'Amazon Lightsail',
-          icon: '💡',
-          useCase: 'Quickly launching a simple WordPress blog or small LAMP stack.',
-          whatItIs: 'An easy-to-use virtual private server (VPS) provider.',
-          whyChoose: 'For beginners, small projects, or predictable monthly pricing.',
-          keyConcepts: 'Bundled compute, storage, and networking; Predictable pricing',
-          pricing: 'Flat, predictable monthly rate (e.g., $3.50/month).',
-          security: 'Simplified firewall rules compared to standard EC2 Security Groups.',
-          handsOn: 'Deploy a Node.js blueprint in Lightsail and attach a static IP.',
-          examTips: ["Keywords: 'simple', 'predictable pricing', 'low experience'.", 'Can be upgraded to EC2 later.'],
-          pitfalls: 'Choosing Lightsail for highly scalable, complex enterprise microservices.',
-          related: ['EC2', 'Route 53'],
-          code: `aws lightsail create-instances \\
-  --instance-names "NodeJsServer" \\
-  --blueprint-id nodejs \\
-  --bundle-id micro_2_0`,
+          badges: ['SAA-C03'],
+          useCase: 'Deploying Node.js as Docker containers.',
+          whatItIs: 'Managed container orchestration.',
+          whyChoose: 'Microservices, consistent deployments.',
+          decisionShortcut: 'Choose ECS Fargate for serverless containers.',
+          keyConcepts: 'Task Definitions, Fargate.',
+          pricing: 'Per vCPU/GB (Fargate).',
+          security: 'Task Roles.',
+          handsOn: 'Deploy ECS Service on Fargate.',
+          examTips: ['Fargate = serverless containers.'],
+          pitfalls: 'EKS for single containers (overkill).',
+          whenNotToUse: 'Simple scripts (Lambda).',
+          limits: 'Fargate max 16 vCPU.',
+          consolePath: 'ECS > Clusters',
+          related: ['ECR', 'ALB'],
+          code: `apiVersion: apps/v1\nkind: Deployment\nmetadata:\n  name: node-app`,
         },
         {
           id: 's3',
           layer: 'Storage',
           name: 'Amazon S3',
           icon: '🪣',
-          useCase: 'Storing user profile pictures, static frontend assets, and backups.',
-          whatItIs: 'Scalable object storage service.',
-          whyChoose: 'Infinite scalability, 11 9s of durability, and native integration with CloudFront.',
-          keyConcepts: 'Buckets, Objects, Storage Classes, Lifecycle Policies, Versioning',
-          pricing: 'Pay per GB stored, requests, and data transfer out. Cheaper tiers available for infrequent access.',
-          security: 'Block Public Access by default. Use Bucket Policies and IAM. Supports KMS encryption.',
-          handsOn: 'Create a bucket, upload an image, and access it via a pre-signed URL in your Node app.',
-          examTips: [
-            'Standard = frequent. Standard-IA = infrequent. Glacier = archive.',
-            '11 9s durability across all classes (except One Zone).',
-          ],
-          pitfalls: 'Making buckets entirely public instead of using CloudFront/OAC or Pre-signed URLs.',
-          related: ['CloudFront', 'Glacier', 'KMS'],
-          code: `resource "aws_s3_bucket" "assets" {
-  bucket = "user-service-assets"
-}
-resource "aws_s3_bucket_public_access_block" "assets_block" {
-  bucket = aws_s3_bucket.assets.id
-  block_public_acls       = true
-  block_public_policy     = true
-}`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Storing user avatars, static assets.',
+          whatItIs: 'Scalable object storage.',
+          whyChoose: 'Infinite scale, 11 9s durability.',
+          decisionShortcut: 'Files, images, backups. Never OS drives.',
+          keyConcepts: 'Buckets, Objects, Lifecycle.',
+          pricing: 'Per GB, requests.',
+          security: 'Block Public Access, IAM.',
+          handsOn: 'Upload via pre-signed URL.',
+          examTips: ['Standard vs IA vs Glacier classes.'],
+          pitfalls: 'Public buckets.',
+          whenNotToUse: 'Block storage (EBS).',
+          limits: '5TB max object size.',
+          consolePath: 'S3 > Buckets',
+          related: ['CloudFront', 'KMS'],
+          code: `resource "aws_s3_bucket" "assets" { bucket = "user-assets" }`,
         },
         {
           id: 'ebs',
           layer: 'Storage',
           name: 'Amazon EBS',
           icon: '💽',
-          useCase: 'Providing the root operating system drive for the EC2 Node.js server.',
-          whatItIs: 'Persistent block storage volumes for use with EC2 instances.',
-          whyChoose: 'When you need a traditional file system, low-latency performance, or to run a self-hosted DB.',
-          keyConcepts: 'Volume Types (gp3, io2), Snapshots, IOPS',
-          pricing: 'Pay per GB provisioned per month, plus provisioned IOPS/throughput.',
-          security: 'Volumes can be encrypted using KMS. Snapshots share the encryption state.',
-          handsOn: 'Create a gp3 volume, attach it to the EC2 instance, format it with ext4, and mount it.',
-          examTips: [
-            'EBS is tied to a single AZ.',
-            'Snapshots are backed by S3 (incremental).',
-            'Use EBS Multi-Attach for clustered apps (io1/io2 only).',
-          ],
-          pitfalls:
-            'Forgetting that EBS volumes are AZ-locked. You cannot attach an EBS volume in AZ-A to an EC2 in AZ-B.',
-          related: ['EC2', 'KMS'],
-          code: `aws ec2 create-volume \\
-  --volume-type gp3 \\
-  --size 100 \\
-  --availability-zone us-east-1a`,
-        },
-        {
-          id: 'efs',
-          layer: 'Storage',
-          name: 'Amazon EFS',
-          icon: '📁',
-          useCase: 'Sharing uploaded user files across multiple instances of the Node.js User Service.',
-          whatItIs: 'Serverless, fully elastic file system (NFS).',
-          whyChoose: 'When multiple EC2/ECS instances across different AZs need concurrent access to shared files.',
-          keyConcepts: 'Mount Targets, Performance Modes (General Purpose, Max I/O)',
-          pricing: 'Pay per GB stored (no provisioned size required).',
-          security: 'Controlled by Security Groups at the Mount Target and IAM for client authorization.',
-          handsOn: 'Create an EFS filesystem, add Mount Targets in 2 private subnets, and mount it to 2 EC2 instances.',
-          examTips: ['EFS spans multiple AZs (unlike EBS).', 'Linux only (NFSv4), not natively supported on Windows.'],
-          pitfalls: 'Using EFS for high-performance databases (latency is higher than EBS).',
-          related: ['EC2', 'ECS', 'AWS Backup'],
-          code: `resource "aws_efs_file_system" "shared" {
-  creation_token   = "shared-uploads"
-  performance_mode = "generalPurpose"
-  encrypted        = true
-}`,
-        },
-        {
-          id: 'glacier',
-          layer: 'Storage',
-          name: 'S3 Glacier',
-          icon: '🧊',
-          useCase: 'Archiving old user activity logs for 7 years for compliance.',
-          whatItIs: 'Secure, durable, and extremely low-cost storage classes for data archiving.',
-          whyChoose: 'For data retained for compliance that is rarely accessed (retrieval takes minutes to hours).',
-          keyConcepts: 'Vaults, Archives, Retrieval Tiers (Expedited, Standard, Bulk), Vault Lock',
-          pricing: 'Extremely low per GB cost, but charges apply for data retrieval and early deletion.',
-          security: 'Vault Lock allows WORM (Write Once Read Many) policies for strict compliance.',
-          handsOn: 'Create an S3 Lifecycle Rule to move logs from S3 Standard to Glacier Deep Archive after 90 days.',
-          examTips: [
-            'Glacier Flexible Retrieval: 1-5 minutes.',
-            'Glacier Deep Archive: 12 hours (cheapest).',
-            'WORM = Vault Lock.',
-          ],
-          pitfalls: 'Putting frequently accessed data in Glacier; retrieval fees will cause a massive bill.',
-          related: ['S3', 'AWS Backup'],
-          code: `{
-  "Rules": [{
-    "ID": "ArchiveLogs",
-    "Filter": { "Prefix": "logs/" },
-    "Status": "Enabled",
-    "Transitions": [{ "Days": 90, "StorageClass": "GLACIER" }]
-  }]
-}`,
+          badges: ['SAA-C03'],
+          useCase: 'Root OS drive for EC2.',
+          whatItIs: 'Persistent block storage.',
+          whyChoose: 'Low-latency file system.',
+          decisionShortcut: 'Hard drive for EC2.',
+          keyConcepts: 'Volume Types, Snapshots.',
+          pricing: 'Per GB provisioned.',
+          security: 'KMS encryption.',
+          handsOn: 'Attach gp3 to EC2.',
+          examTips: ['EBS is AZ-locked.', 'Snapshots in S3.'],
+          pitfalls: 'Forgetting EBS is AZ-locked.',
+          whenNotToUse: 'Shared network storage (EFS).',
+          limits: 'Max 64TB.',
+          consolePath: 'EC2 > Volumes',
+          related: ['EC2'],
+          code: `aws ec2 create-volume --volume-type gp3 --size 100`,
         },
         {
           id: 'rds',
           layer: 'Database',
           name: 'Amazon RDS',
           icon: '🗄️',
-          useCase: 'Storing user relational data (users, addresses, preferences).',
-          whatItIs: 'Managed relational database service (PostgreSQL, MySQL, MariaDB, Oracle, SQL Server).',
-          whyChoose: 'When you need complex joins, ACID transactions, and want AWS to handle backups and patching.',
-          keyConcepts: 'Multi-AZ (HA), Read Replicas (Scaling), Automated Backups',
-          pricing: 'Pay per instance hour, provisioned storage, and data transfer.',
-          security: 'Deployed in private subnets. Access controlled by Security Groups. Encrypted via KMS.',
-          handsOn: 'Launch an RDS PostgreSQL instance in private subnets, connect via EC2 Node.js using `pg` library.',
-          examTips: [
-            'Multi-AZ is for Disaster Recovery (synchronous).',
-            'Read Replicas are for read scaling (asynchronous).',
-          ],
-          pitfalls: 'Exposing RDS to the public internet. Always use private subnets.',
-          related: ['EC2', 'VPC', 'Secrets Manager'],
-          code: `resource "aws_db_instance" "users" {
-  engine               = "postgres"
-  instance_class       = "db.t3.micro"
-  allocated_storage    = 20
-  db_name              = "userdb"
-  username             = "admin"
-  password             = "supersecret"
-  multi_az             = true
-  db_subnet_group_name = aws_db_subnet_group.private.name
-}`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Structured user data (PostgreSQL).',
+          whatItIs: 'Managed relational DB.',
+          whyChoose: 'ACID transactions, managed backups.',
+          decisionShortcut: 'Migrating traditional SQL.',
+          keyConcepts: 'Multi-AZ, Read Replicas.',
+          pricing: 'Per instance hour.',
+          security: 'Private subnets, SGs.',
+          handsOn: 'Launch PostgreSQL.',
+          examTips: ['Multi-AZ = DR. Read Replicas = Scaling.'],
+          pitfalls: 'Public RDS.',
+          whenNotToUse: 'Massive key-value (DynamoDB).',
+          limits: '5 Read Replicas.',
+          consolePath: 'RDS > Databases',
+          related: ['EC2', 'VPC'],
+          code: `resource "aws_db_instance" "users" { engine = "postgres" }`,
         },
         {
           id: 'dynamodb',
           layer: 'Database',
           name: 'Amazon DynamoDB',
           icon: '⚡',
-          useCase: 'Storing user session tokens and carts with sub-millisecond latency.',
-          whatItIs: 'Serverless, fully managed NoSQL key-value and document database.',
-          whyChoose:
-            'For internet-scale applications requiring massive, predictable read/write throughput at single-digit millisecond latency.',
-          keyConcepts: 'Partition Key, Sort Key, GSI/LSI, On-Demand vs Provisioned, DAX',
-          pricing: 'Pay per Read/Write Capacity Unit (RCU/WCU) or per request (On-Demand), plus storage.',
-          security: 'IAM policies provide fine-grained table/item level access control.',
-          handsOn:
-            'Create a `Sessions` table with `SessionId` as Partition Key and query it via the AWS SDK in Node.js.',
-          examTips: ['DAX = in-memory cache for DynamoDB.', 'Global Tables = multi-region active-active replication.'],
-          pitfalls: "Poor partition key design causing 'hot partitions' and throttling.",
-          related: ['Lambda', 'API Gateway', 'IAM'],
-          code: `aws dynamodb create-table \\
-  --table-name UserSessions \\
-  --attribute-definitions AttributeName=SessionId,AttributeType=S \\
-  --key-schema AttributeName=SessionId,KeyType=HASH \\
-  --billing-mode PAY_PER_REQUEST`,
-        },
-        {
-          id: 'aurora',
-          layer: 'Database',
-          name: 'Amazon Aurora',
-          icon: '🌌',
-          useCase: 'Enterprise-grade relational database for core user and billing records.',
-          whatItIs: 'MySQL and PostgreSQL-compatible relational database built for the cloud.',
-          whyChoose: 'When you need the performance of commercial databases (Oracle/SQL Server) at 1/10th the cost.',
-          keyConcepts: 'Storage auto-scales to 128TB, 6 copies of data across 3 AZs, Aurora Serverless',
-          pricing: 'Instance hours + IOPS + Storage. Serverless v2 scales and bills per ACU (Aurora Capacity Unit).',
-          security: 'VPC isolated, KMS encryption at rest, TLS in transit.',
-          handsOn: 'Deploy an Aurora Serverless v2 PostgreSQL cluster to handle unpredictable traffic spikes.',
-          examTips: [
-            'Up to 15 Read Replicas (RDS is 5).',
-            'Failover is much faster than standard RDS.',
-            'Storage auto-heals.',
-          ],
-          pitfalls:
-            'Using standard Aurora for small, consistent dev workloads where standard RDS t3.micro would be cheaper.',
-          related: ['RDS', 'VPC'],
-          code: `resource "aws_rds_cluster" "aurora" {
-  engine                  = "aurora-postgresql"
-  engine_mode             = "provisioned"
-  serverlessv2_scaling_configuration {
-    max_capacity = 16.0
-    min_capacity = 0.5
-  }
-}`,
-        },
-        {
-          id: 'elasticache',
-          layer: 'Database',
-          name: 'Amazon ElastiCache',
-          icon: '🚀',
-          useCase: 'Caching frequently accessed user profiles to reduce database load.',
-          whatItIs: 'Managed Redis and Memcached in-memory data stores.',
-          whyChoose:
-            'To improve application performance to sub-millisecond latency and shield backend DBs from heavy read traffic.',
-          keyConcepts: 'Redis vs Memcached, Nodes, Clusters, Multi-AZ with Auto-Failover',
-          pricing: 'Pay per node-hour.',
-          security: 'VPC isolated. Redis supports encryption at rest/transit and AUTH tokens.',
-          handsOn: 'Deploy a Redis cluster and modify the Node.js User Service to implement a cache-aside pattern.',
-          examTips: [
-            'Memcached = simple, multi-threaded. Redis = advanced, persistence, replication, pub/sub.',
-            'Used for session state.',
-          ],
-          pitfalls: 'Not configuring a TTL (Time To Live), leading to full memory and eviction of important keys.',
-          related: ['RDS', 'DynamoDB', 'EC2'],
-          code: `// Node.js Cache-Aside Example
-const user = await redis.get(\`user:\${id}\`);
-if (user) return JSON.parse(user);
-
-const dbUser = await db.query('SELECT * FROM users WHERE id=?', [id]);
-await redis.setex(\`user:\${id}\`, 3600, JSON.stringify(dbUser));
-return dbUser;`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Session tokens.',
+          whatItIs: 'Serverless NoSQL DB.',
+          whyChoose: 'Predictable single-digit ms latency.',
+          decisionShortcut: 'Serverless NoSQL, sessions.',
+          keyConcepts: 'PK, SK, GSI, On-Demand.',
+          pricing: 'Per RCU/WCU.',
+          security: 'IAM policies.',
+          handsOn: 'Create Sessions table.',
+          examTips: ['DAX = caching.', 'Global Tables = multi-region.'],
+          pitfalls: 'Poor partition key design.',
+          whenNotToUse: 'Complex SQL joins.',
+          limits: '400KB item size.',
+          consolePath: 'DynamoDB > Tables',
+          related: ['Lambda'],
+          code: `aws dynamodb create-table --table-name Sessions`,
         },
         {
           id: 'vpc',
           layer: 'Network',
           name: 'Amazon VPC',
           icon: '🕸️',
-          useCase: 'Providing an isolated virtual network for the entire Node.js architecture.',
-          whatItIs: 'Virtual Private Cloud; a logically isolated section of the AWS Cloud.',
-          whyChoose: 'Mandatory foundation for AWS. Gives full control over IP addressing, subnets, and routing.',
-          keyConcepts: 'Subnets, Route Tables, Internet Gateway (IGW), NAT Gateway, VPC Endpoints',
-          pricing: 'VPC is free. You pay for NAT Gateways, EIPs, and VPC Endpoints.',
-          security: 'Security Groups (instance-level) and NACLs (subnet-level).',
-          handsOn: 'Create a VPC with 2 public subnets (ALB) and 2 private subnets (EC2/RDS), routed via NAT Gateway.',
-          examTips: [
-            'Public subnet = route to IGW.',
-            'Private subnet needs NAT Gateway to reach the internet.',
-            'VPC Endpoints allow private access to AWS services like S3.',
-          ],
-          pitfalls: 'Overlapping CIDR blocks making future VPC Peering or Direct Connect impossible.',
-          related: ['EC2', 'Direct Connect', 'Transit Gateway'],
-          code: `resource "aws_vpc" "main" {
-  cidr_block = "10.0.0.0/16"
-  enable_dns_hostnames = true
-}
-resource "aws_subnet" "private" {
-  vpc_id     = aws_vpc.main.id
-  cidr_block = "10.0.1.0/24"
-}`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Isolated network for architecture.',
+          whatItIs: 'Virtual Private Cloud.',
+          whyChoose: 'Mandatory network foundation.',
+          decisionShortcut: 'Network boundary for AWS.',
+          keyConcepts: 'Subnets, IGW, NAT, Route Tables.',
+          pricing: 'Free (pay for NAT/EIP).',
+          security: 'SGs, NACLs.',
+          handsOn: 'Create VPC with public/private subnets.',
+          examTips: ['Private subnet needs NAT for internet.'],
+          pitfalls: 'Overlapping CIDRs.',
+          whenNotToUse: 'N/A.',
+          limits: '5 VPCs/region. Max /16 CIDR.',
+          consolePath: 'VPC',
+          related: ['EC2'],
+          code: `resource "aws_vpc" "main" { cidr_block = "10.0.0.0/16" }`,
         },
         {
           id: 'cloudfront',
           layer: 'Network',
           name: 'Amazon CloudFront',
           icon: '🌍',
-          useCase: 'Caching user avatars globally to reduce latency and S3 costs.',
-          whatItIs: 'Global Content Delivery Network (CDN) service.',
-          whyChoose: 'To deliver data, videos, applications, and APIs to customers globally with low latency.',
-          keyConcepts: 'Distributions, Edge Locations, Origins (S3, ALB), Cache Behaviors, OAC',
-          pricing:
-            'Pay for data transfer out and HTTP requests. Cheaper than transferring directly from S3 to internet.',
-          security: 'Enforces HTTPS. Integrates with AWS WAF. Origin Access Control (OAC) keeps S3 buckets private.',
-          handsOn:
-            'Create a CloudFront distribution pointing to the S3 assets bucket, configure OAC, and test edge caching.',
-          examTips: [
-            'Edge locations cache content.',
-            'Can be used to accelerate dynamic API traffic, not just static files.',
-          ],
-          pitfalls: 'Forgetting to invalidate the CloudFront cache when updating static assets.',
-          related: ['S3', 'WAF', 'Route 53', 'ACM'],
-          code: `aws cloudfront create-invalidation \\
-  --distribution-id E12345ABCD \\
-  --paths "/avatars/*"`,
-        },
-        {
-          id: 'route53',
-          layer: 'Network',
-          name: 'Amazon Route 53',
-          icon: '🧭',
-          useCase: 'Routing `api.example.com` to the Application Load Balancer.',
-          whatItIs: 'Highly available and scalable cloud DNS web service.',
-          whyChoose: '100% SLA for DNS resolution. Seamless integration with AWS resources (Alias records).',
-          keyConcepts: 'Hosted Zones, Alias Records, Routing Policies (Simple, Weighted, Latency, Failover)',
-          pricing: 'Pay per Hosted Zone and per million DNS queries.',
-          security: 'Supports DNSSEC. Can create Private Hosted Zones to resolve internal VPC domain names.',
-          handsOn: 'Register a domain, create a Public Hosted Zone, and create an Alias A-Record pointing to an ALB.',
-          examTips: [
-            'Alias records are free and can point to AWS resources (ALB, CloudFront, S3). CNAMEs cannot point to apex/root domains.',
-            'Use Failover routing for active-passive DR.',
-          ],
-          pitfalls:
-            'Using CNAME instead of Alias records for AWS resources, which incurs query charges and breaks apex domains.',
-          related: ['ALB', 'CloudFront', 'VPC'],
-          code: `resource "aws_route53_record" "api" {
-  zone_id = aws_route53_zone.primary.zone_id
-  name    = "api.example.com"
-  type    = "A"
-  alias {
-    name                   = aws_lb.api.dns_name
-    zone_id                = aws_lb.api.zone_id
-    evaluate_target_health = true
-  }
-}`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Caching avatars globally.',
+          whatItIs: 'Global CDN.',
+          whyChoose: 'Low latency delivery.',
+          decisionShortcut: 'Cache static assets at edge.',
+          keyConcepts: 'Distributions, Origins, OAC.',
+          pricing: 'Data transfer out.',
+          security: 'HTTPS, WAF, OAC.',
+          handsOn: 'Point CDN to S3.',
+          examTips: ['Accelerates dynamic APIs too.'],
+          pitfalls: 'Forgetting cache invalidation.',
+          whenNotToUse: 'Internal VPC traffic.',
+          limits: '30GB per request.',
+          consolePath: 'CloudFront',
+          related: ['S3', 'WAF'],
+          code: `aws cloudfront create-invalidation --paths "/*"`,
         },
         {
           id: 'alb',
           layer: 'Network',
-          name: 'Application Load Balancer',
+          name: 'App Load Balancer',
           icon: '⚖️',
-          useCase: 'Distributing traffic to multiple Node.js EC2 instances.',
-          whatItIs: 'Layer 7 (HTTP/HTTPS) load balancer.',
-          whyChoose: 'To distribute incoming application traffic across multiple targets, enabling high availability.',
-          keyConcepts: 'Listeners, Target Groups, Path-based Routing, SSL Termination',
-          pricing: 'Pay per hour and per Load Balancer Capacity Unit (LCU).',
-          security: 'Terminates SSL/TLS certificates (via ACM). Acts as the attachment point for AWS WAF.',
-          handsOn:
-            'Create an ALB in public subnets, listen on port 443 with an ACM cert, and forward to a Target Group of private EC2 instances on port 3000.',
-          examTips: [
-            'ALB = Layer 7 (HTTP). NLB = Layer 4 (TCP/UDP, ultra-high performance).',
-            'ALBs must span at least 2 AZs.',
-          ],
-          pitfalls: 'Security group mismatch: ALB must allow 443 from Internet, EC2 must allow 3000 from ALB.',
-          related: ['EC2', 'Auto Scaling', 'ACM', 'WAF'],
-          code: `resource "aws_lb" "api" {
-  name               = "api-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.alb_sg.id]
-  subnets            = [subnet1, subnet2]
-}`,
+          badges: ['SAA-C03'],
+          useCase: 'Distributing requests to Node.js EC2s.',
+          whatItIs: 'Layer 7 Load Balancer.',
+          whyChoose: 'Distribute traffic, HA.',
+          decisionShortcut: 'HTTP/HTTPS routing.',
+          keyConcepts: 'Listeners, Target Groups.',
+          pricing: 'Per hour + LCU.',
+          security: 'SSL Termination, WAF.',
+          handsOn: 'ALB in public subnet routing to private EC2.',
+          examTips: ['ALB=L7. NLB=L4.', 'Must span 2 AZs.'],
+          pitfalls: 'SG mismatch.',
+          whenNotToUse: 'Ultra-fast TCP (NLB).',
+          limits: '1000 targets.',
+          consolePath: 'EC2 > Load Balancers',
+          related: ['EC2', 'ASG'],
+          code: `resource "aws_lb" "api" { load_balancer_type = "application" }`,
         },
         {
-          id: 'apigateway',
+          id: 'apigw',
           layer: 'Network',
           name: 'API Gateway',
           icon: '🚪',
-          useCase: 'Providing a unified REST API front-end for various backend Lambda functions.',
-          whatItIs: 'Fully managed service to create, publish, maintain, monitor, and secure APIs.',
-          whyChoose: 'When you need rate limiting, API keys, usage plans, or to expose Lambda functions as HTTP APIs.',
-          keyConcepts: 'REST vs HTTP APIs, Stages, Authorizers, Throttling',
-          pricing: 'Pay per million API calls + data transfer.',
-          security: 'Integrates with Cognito or custom Lambda Authorizers for auth. Supports AWS WAF.',
-          handsOn:
-            'Create an HTTP API, configure a catch-all route `$default`, and integrate it with your Lambda function.',
-          examTips: [
-            'HTTP APIs are cheaper/faster than REST APIs.',
-            'Use API Gateway to throttle requests to protect backends.',
-          ],
-          pitfalls: "Forgetting to deploy changes to a Stage. Changes don't go live immediately.",
-          related: ['Lambda', 'Cognito', 'WAF'],
-          code: `aws apigatewayv2 create-api \\
-  --name "UserServiceAPI" \\
-  --protocol-type HTTP \\
-  --target arn:aws:lambda:us-east-1:123:function:UserFunc`,
+          badges: ['SAA-C03'],
+          useCase: 'Secure entry point for Lambda REST API.',
+          whatItIs: 'Managed API service.',
+          whyChoose: 'Versioning, throttling.',
+          decisionShortcut: 'Expose Lambdas as HTTP.',
+          keyConcepts: 'Stages, Usage Plans.',
+          pricing: 'Per million requests.',
+          security: 'Cognito auth.',
+          handsOn: 'REST API -> Lambda.',
+          examTips: ['Provides caching.'],
+          pitfalls: 'Forgetting to deploy stage.',
+          whenNotToUse: 'Basic EC2 HTTP routing (ALB).',
+          limits: '10k RPS default.',
+          consolePath: 'API Gateway',
+          related: ['Lambda', 'Cognito'],
+          code: `aws apigateway create-rest-api --name "API"`,
         },
         {
           id: 'iam',
           layer: 'Security',
           name: 'AWS IAM',
           icon: '🔑',
-          useCase: 'Granting the Node.js EC2 instance permission to read from S3.',
-          whatItIs: 'Identity and Access Management. Secures access to AWS services and resources.',
-          whyChoose: 'Mandatory. Used to enforce the Principle of Least Privilege across the AWS account.',
-          keyConcepts: 'Users, Groups, Roles, Policies (JSON), ARN',
-          pricing: 'IAM is a free global service.',
-          security: 'Always use IAM Roles for EC2/Lambda instead of putting long-term access keys in code.',
-          handsOn:
-            'Create an IAM Role with an S3 ReadOnly policy, attach it to an EC2 instance via an Instance Profile.',
-          examTips: [
-            'IAM Roles are assumed by AWS services (EC2, Lambda).',
-            'IAM Users are for humans/external apps.',
-            'Root user should have MFA and not be used for daily tasks.',
-          ],
-          pitfalls: 'Hardcoding AWS Access Keys in source code and pushing to GitHub.',
-          related: ['STS', 'KMS', 'Organizations'],
-          code: `{
-  "Version": "2012-10-17",
-  "Statement": [{
-    "Effect": "Allow",
-    "Action": ["s3:GetObject"],
-    "Resource": ["arn:aws:s3:::my-bucket/*"]
-  }]
-}`,
+          badges: ['CCP', 'SAA-C03'],
+          useCase: 'Granting EC2 access to S3.',
+          whatItIs: 'Identity and Access Management.',
+          whyChoose: 'Core security requirement.',
+          decisionShortcut: 'Manage AWS permissions.',
+          keyConcepts: 'Users, Roles, Policies.',
+          pricing: 'Free.',
+          security: 'Least privilege.',
+          handsOn: 'Create IAM Role for EC2.',
+          examTips: ['Roles are for services/federation. Users for people.'],
+          pitfalls: 'Hardcoding keys.',
+          whenNotToUse: 'N/A.',
+          limits: '5000 users.',
+          consolePath: 'IAM',
+          related: ['EC2', 'Lambda'],
+          code: `{ "Effect": "Allow", "Action": "s3:*", "Resource": "*" }`,
         },
         {
           id: 'kms',
           layer: 'Security',
           name: 'AWS KMS',
           icon: '🛡️',
-          useCase: 'Encrypting the RDS database and EBS volumes at rest.',
-          whatItIs: 'Key Management Service. Centralized control over cryptographic keys.',
-          whyChoose: 'To meet security and compliance requirements for data at rest encryption.',
-          keyConcepts: 'Customer Managed Keys (CMK), Envelope Encryption, Key Rotation',
-          pricing: 'Pay per key per month + per 10k API requests.',
-          security: 'KMS uses FIPS 140-2 validated hardware security modules (HSMs).',
-          handsOn: 'Create a symmetric KMS key, and specify it when launching your RDS database to encrypt it.',
-          examTips: [
-            'Envelope encryption: KMS encrypts the Data Key, the Data Key encrypts the data.',
-            'CMKs can have automatic annual rotation.',
-          ],
-          pitfalls:
-            'Deleting a KMS key that is actively encrypting critical data. Data becomes permanently unreadable.',
-          related: ['S3', 'EBS', 'RDS', 'IAM'],
-          code: `aws kms create-key \\
-  --description "Key for User DB" \\
-  --enable-key-rotation`,
+          badges: ['SAA-C03'],
+          useCase: 'Encrypting RDS and EBS volumes.',
+          whatItIs: 'Key Management Service.',
+          whyChoose: 'Centralized encryption control.',
+          decisionShortcut: 'Encryption at rest.',
+          keyConcepts: 'CMK, Envelope Encryption.',
+          pricing: 'Per key + requests.',
+          security: 'Hardware security modules.',
+          handsOn: 'Encrypt EBS volume.',
+          examTips: ['CMK rotation is annual.'],
+          pitfalls: 'Deleting a key accidentally.',
+          whenNotToUse: 'Managing SSL certs (use ACM).',
+          limits: '100,000 keys.',
+          consolePath: 'KMS',
+          related: ['EBS', 'S3', 'RDS'],
+          code: `aws kms encrypt --plaintext "secret"`,
         },
         {
           id: 'waf',
           layer: 'Security',
           name: 'AWS WAF',
           icon: '🧱',
-          useCase: 'Blocking SQL Injection and cross-site scripting attempts against the API.',
+          badges: ['SAA-C03'],
+          useCase: 'Blocking SQL injection.',
           whatItIs: 'Web Application Firewall.',
-          whyChoose: 'To protect web applications and APIs from common web exploits and bots.',
-          keyConcepts: 'Web ACLs, Rules, IP Sets, Managed Rule Groups',
-          pricing: 'Pay per Web ACL, per Rule, and per million requests inspected.',
-          security: 'Can be attached to CloudFront, ALB, or API Gateway.',
-          handsOn:
-            'Create a Web ACL, attach the AWS Managed Core Rule Set (blocks SQLi/XSS), and attach it to the ALB.',
-          examTips: [
-            'WAF operates at Layer 7.',
-            'Can block traffic based on IP, country, or specific headers/payloads.',
-          ],
-          pitfalls:
-            "Deploying WAF in 'Block' mode without testing first. Always test in 'Count' mode to monitor false positives.",
-          related: ['ALB', 'CloudFront', 'Shield'],
-          code: `resource "aws_wafv2_web_acl" "protection" {
-  name  = "api-waf"
-  scope = "REGIONAL"
-  default_action { allow {} }
-  rule {
-    name     = "AWSManagedRulesCommonRuleSet"
-    priority = 1
-    statement { managed_rule_group_statement { name = "AWSManagedRulesCommonRuleSet" vendor_name = "AWS" } }
-    visibility_config { cloudwatch_metrics_enabled = true metric_name = "common" sampled_requests_enabled = true }
-  }
-  visibility_config { cloudwatch_metrics_enabled = true metric_name = "api-waf" sampled_requests_enabled = true }
-}`,
+          whyChoose: 'Protect web apps from common exploits.',
+          decisionShortcut: 'Layer 7 protection.',
+          keyConcepts: 'Web ACLs, Rules.',
+          pricing: 'Per Web ACL + rules.',
+          security: 'Attaches to ALB/CloudFront/APIGW.',
+          handsOn: 'Attach AWS Managed Rules to ALB.',
+          examTips: ['Protects against OWASP top 10.'],
+          pitfalls: 'Blocking legitimate traffic (use Count mode first).',
+          whenNotToUse: 'Layer 4 DDoS (use Shield).',
+          limits: '1500 WCUs.',
+          consolePath: 'WAF',
+          related: ['ALB', 'CloudFront'],
+          code: `resource "aws_wafv2_web_acl" "main" { scope = "REGIONAL" }`,
         },
         {
           id: 'kinesis',
           layer: 'Analytics',
           name: 'Amazon Kinesis',
           icon: '🌊',
-          useCase: 'Ingesting thousands of real-time user activity events per second.',
-          whatItIs: 'Real-time data streaming service.',
-          whyChoose: 'To collect, process, and analyze real-time streaming data continuously.',
-          keyConcepts: 'Data Streams, Shards, Partition Keys, Firehose',
-          pricing: 'Pay per Shard hour and per PUT payload unit.',
-          security: 'Encrypt streams via KMS. Read/Write access controlled by IAM.',
-          handsOn:
-            'Create a Kinesis Data Stream, use Node.js to write events to it, and attach a Lambda to process batches.',
-          examTips: [
-            '1 Shard = 1MB/s or 1000 records/s IN, 2MB/s OUT.',
-            'Firehose is for loading streams directly into S3/Redshift without code.',
-          ],
-          pitfalls: 'Not having enough shards leading to ProvisionedThroughputExceeded errors.',
-          related: ['Lambda', 'S3', 'Redshift'],
-          code: `aws kinesis create-stream \\
-  --stream-name UserEvents \\
-  --shard-count 2`,
+          badges: ['SAA-C03'],
+          useCase: 'Ingesting user clickstreams.',
+          whatItIs: 'Real-time streaming data service.',
+          whyChoose: 'High throughput data ingestion.',
+          decisionShortcut: 'Streaming big data.',
+          keyConcepts: 'Data Streams, Firehose, Shards.',
+          pricing: 'Per shard hour.',
+          security: 'KMS encryption.',
+          handsOn: 'Kinesis Firehose to S3.',
+          examTips: ['KDS = real-time. Firehose = load to S3/Redshift.'],
+          pitfalls: 'Under-provisioning shards.',
+          whenNotToUse: 'Simple pub/sub (SNS).',
+          limits: '1MB/sec/shard ingest.',
+          consolePath: 'Kinesis',
+          related: ['S3', 'Lambda'],
+          code: `aws kinesis create-stream --stream-name Clicks --shard-count 1`,
         },
         {
           id: 'sqs',
           layer: 'Messaging',
           name: 'Amazon SQS',
           icon: '📬',
-          useCase: 'Decoupling the user registration API from the background email welcome service.',
-          whatItIs: 'Simple Queue Service. Fully managed message queuing.',
-          whyChoose:
-            "To decouple microservices, absorb traffic spikes, and ensure messages aren't lost if a backend is down.",
-          keyConcepts: 'Standard vs FIFO, Visibility Timeout, Dead-Letter Queues (DLQ)',
-          pricing: 'Pay per million API requests. Extremely cost-effective.',
-          security: 'Messages can be encrypted with KMS. Queue Policies control cross-account access.',
-          handsOn:
-            'Create an SQS Standard Queue. Have the Node API send a message. Have a worker process read and delete it.',
-          examTips: [
-            'Standard = at-least-once delivery, best effort ordering.',
-            'FIFO = exactly-once delivery, strict ordering.',
-            'Visibility timeout hides messages while being processed.',
-          ],
-          pitfalls:
-            'Processing a message but forgetting to explicitly delete it from the queue, causing it to be processed again.',
-          related: ['SNS', 'Lambda', 'EC2'],
-          code: `// Node.js AWS SDK v3
-const { SendMessageCommand } = require("@aws-sdk/client-sqs");
-await sqs.send(new SendMessageCommand({
-  QueueUrl: "https://sqs.region.amazonaws.com/123/Queue",
-  MessageBody: JSON.stringify({ userId: 1, action: "signup" })
-}));`,
+          badges: ['SAA-C03'],
+          useCase: 'Decoupling User Service from Email Service.',
+          whatItIs: 'Managed message queue.',
+          whyChoose: 'Fault tolerance, decoupling.',
+          decisionShortcut: 'Queue messages for asynchronous processing.',
+          keyConcepts: 'Standard vs FIFO, Visibility Timeout, DLQ.',
+          pricing: 'Per request.',
+          security: 'KMS.',
+          handsOn: 'Send/receive message in Node.js.',
+          examTips: ['Standard = at least once. FIFO = exactly once.'],
+          pitfalls: 'Visibility timeout too short.',
+          whenNotToUse: 'Fan-out to multiple systems (SNS).',
+          limits: '256KB max payload.',
+          consolePath: 'SQS',
+          related: ['SNS', 'Lambda'],
+          code: `aws sqs send-message --queue-url "url" --message-body "test"`,
         },
         {
           id: 'sns',
           layer: 'Messaging',
           name: 'Amazon SNS',
           icon: '📢',
-          useCase: "Sending a 'System Outage' alert to multiple teams (Email, SMS, Slack webhook) simultaneously.",
-          whatItIs: 'Simple Notification Service. Fully managed Pub/Sub messaging.',
-          whyChoose: 'For fan-out architectures where one event needs to trigger multiple independent systems.',
-          keyConcepts: 'Topics, Subscriptions, Fan-out, Message Filtering',
-          pricing: 'Pay per million publishes and varying costs per delivery type (SMS is expensive, SQS is cheap).',
-          security: 'Topic policies control who can publish or subscribe.',
-          handsOn:
-            'Create an SNS Topic, subscribe an email address and an SQS queue. Publish a message and observe both receiving it.',
-          examTips: [
-            'SNS = Pub/Sub (Push). SQS = Queues (Pull).',
-            'Common pattern: SNS fans out to multiple SQS queues.',
-          ],
-          pitfalls:
-            'Relying on SNS for guaranteed application state transfer without an SQS buffer in case the receiver goes down.',
+          badges: ['SAA-C03'],
+          useCase: 'Sending alerts to admins.',
+          whatItIs: 'Pub/Sub messaging service.',
+          whyChoose: 'Fan-out messages to multiple subscribers.',
+          decisionShortcut: 'Push notifications, pub/sub.',
+          keyConcepts: 'Topics, Subscriptions.',
+          pricing: 'Per publish/delivery.',
+          security: 'KMS.',
+          handsOn: 'Subscribe SQS to SNS Topic.',
+          examTips: ['SNS to SQS fan-out pattern is very common.'],
+          pitfalls: 'Assuming message ordering (use FIFO SNS).',
+          whenNotToUse: 'Message queueing/polling (SQS).',
+          limits: '256KB payload.',
+          consolePath: 'SNS',
           related: ['SQS', 'Lambda'],
-          code: `aws sns publish \\
-  --topic-arn arn:aws:sns:us-east-1:123:Alerts \\
-  --message "High CPU Utilization Detected"`,
+          code: `aws sns publish --topic-arn "arn" --message "Alert"`,
         },
       ];
 
-      const grid = document.getElementById('grid');
-      const detail = document.getElementById('detail');
-      const tabs = document.querySelectorAll('.tab');
-
-      function renderGrid(filter) {
-        grid.innerHTML = '';
-        services.forEach((svc) => {
-          if (filter === 'All' || filter === 'Masterclass' || svc.layer === filter) {
-            const el = document.createElement('div');
-            el.className = 'svc-card';
-            el.innerHTML = `
-        <div class="svc-layer">${svc.layer}</div>
-        <div class="svc-header">${svc.icon} ${svc.name}</div>
-        <p class="svc-desc">${svc.useCase}</p>
-      `;
-            el.onclick = () => {
-              document.querySelectorAll('.svc-card').forEach((c) => c.classList.remove('active'));
-              el.classList.add('active');
-              showDetail(svc);
-            };
-            grid.appendChild(el);
-          }
-        });
-      }
-
-      function showDetail(svc) {
-        const examHtml = svc.examTips.map((t) => `<li>${t}</li>`).join('');
-        const tagsHtml = svc.related.map((r) => `<span class="tag">${r}</span>`).join('');
-
-        detail.innerHTML = `
-    <div style="font-size: 11px; color: var(--blue); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;">
-      ${svc.layer} Layer
-    </div>
-    <h3>${svc.icon} ${svc.name}</h3>
-    
-    <div class="use-case-box">
-      <strong>Typical Use Case:</strong><br> ${svc.useCase}
-    </div>
-
-    <div class="detail-section">
-      <h4>What it is</h4>
-      <p>${svc.whatItIs}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Why choose it</h4>
-      <p>${svc.whyChoose}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Key Concepts</h4>
-      <p>${svc.keyConcepts}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Pricing & Security</h4>
-      <p><strong>Pricing:</strong> ${svc.pricing}</p>
-      <p><strong>Security:</strong> ${svc.security}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Hands-on Idea</h4>
-      <p>${svc.handsOn}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Exam Tips</h4>
-      <ul>${examHtml}</ul>
-    </div>
-
-    <div class="detail-section">
-      <h4>Common Pitfalls</h4>
-      <p>${svc.pitfalls}</p>
-    </div>
-
-    <div class="detail-section">
-      <h4>Related Services</h4>
-      <div class="tags">${tagsHtml}</div>
-    </div>
-
-    <div class="detail-section">
-      <h4>Example Code / Config</h4>
-      <pre><code>${highlight(svc.code)}</code></pre>
-    </div>
-  `;
-      }
-
-      function highlight(code) {
-        return code
+      function highlightCode(str) {
+        return str
           .replace(/(".*?"|'.*?')/g, '<span class="str">$1</span>')
           .replace(
-            /\b(aws|resource|engine|instance_class|allocated_storage|db_name|username|password|multi_az|db_subnet_group_name|engine_mode|serverlessv2_scaling_configuration|max_capacity|min_capacity|cidr_block|enable_dns_hostnames|vpc_id|zone_id|name|type|alias|evaluate_target_health|internal|load_balancer_type|security_groups|subnets|Version|Statement|Effect|Action|Resource|aws_vpc|aws_subnet|aws_route53_record|aws_lb|aws_wafv2_web_acl|scope|default_action|rule|priority|statement|managed_rule_group_statement|vendor_name|visibility_config|cloudwatch_metrics_enabled|metric_name|sampled_requests_enabled|aws_s3_bucket|aws_s3_bucket_public_access_block|bucket|block_public_acls|block_public_policy|aws_efs_file_system|creation_token|performance_mode|encrypted|aws_db_instance|aws_rds_cluster|aws_autoscaling_group|vpc_zone_identifier|desired_capacity|max_size|min_size|target_group_arns|exports|async|await|const|require|new|return|true|false)\b/g,
+            /\b(resource|aws|ec2|autoscaling|s3|rds|dynamodb|cloudfront|route53|apigateway|kms|wafv2|kinesis|sqs|sns|async|return|exports)\b/g,
             '<span class="kw">$1</span>',
           )
           .replace(/(#.*|\/\/.*)/g, '<span class="cmt">$1</span>');
       }
 
-      tabs.forEach((tab) => {
-        tab.onclick = () => {
-          tabs.forEach((t) => t.classList.remove('active'));
-          tab.classList.add('active');
+      function renderGrid(filter, search = '') {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = '';
+        const s = search.toLowerCase();
 
+        let count = 0;
+        services.forEach((svc) => {
+          const matchTab = filter === 'All' || filter === 'Masterclass' || svc.layer === filter;
+          const matchSearch =
+            svc.name.toLowerCase().includes(s) ||
+            svc.layer.toLowerCase().includes(s) ||
+            svc.useCase.toLowerCase().includes(s) ||
+            svc.keyConcepts.toLowerCase().includes(s);
+
+          if (matchTab && matchSearch) {
+            count++;
+            const card = document.createElement('div');
+            card.className = 'svc-card';
+            card.innerHTML = `
+        <div class="svc-layer">${svc.layer}</div>
+        <div class="svc-header">${svc.icon} ${svc.name}</div>
+        <p class="svc-desc">${svc.useCase}</p>
+      `;
+            card.onclick = () => {
+              document.querySelectorAll('.svc-card').forEach((c) => c.classList.remove('active'));
+              card.classList.add('active');
+              showDetail(svc);
+            };
+            grid.appendChild(card);
+          }
+        });
+        document.getElementById('resultCount').innerText = `${count} Services`;
+      }
+
+      function showDetail(svc) {
+        const isEC2 = svc.id === 'ec2';
+        document.getElementById('detail').innerHTML = `
+    <div class="dp-header">
+      <div class="svc-layer" style="margin-bottom:4px;">${svc.layer}</div>
+      <h3>${svc.icon} ${svc.name}</h3>
+      <div class="tags">${svc.badges.map((b) => `<span class="tag">${b}</span>`).join('')}</div>
+      ${isEC2 ? '<a href="#ec2-masterclass" class="btn-scroll">Jump to EC2 Masterclass &darr;</a>' : ''}
+    </div>
+    <div class="dp-body">
+      <div class="decision-shortcut"><strong>Shortcut:</strong> ${svc.decisionShortcut}</div>
+      
+      <div class="detail-section">
+        <h4>What it is & Why choose it</h4>
+        <p>${svc.whatItIs}</p>
+        <p>${svc.whyChoose}</p>
+      </div>
+
+      <div class="detail-section">
+        <h4>Key Concepts & Pricing</h4>
+        <p><strong>Concepts:</strong> ${svc.keyConcepts}</p>
+        <p><strong>Pricing:</strong> ${svc.pricing}</p>
+        <p><strong>Security:</strong> ${svc.security}</p>
+      </div>
+
+      <div class="detail-section">
+        <h4>Exam Tips & Limits</h4>
+        <ul>${svc.examTips.map((t) => `<li>${t}</li>`).join('')}</ul>
+        <p><strong>Pitfall:</strong> ${svc.pitfalls}</p>
+        <p><strong>Don't use when:</strong> ${svc.whenNotToUse}</p>
+        <p><strong>Limits:</strong> ${svc.limits}</p>
+      </div>
+
+      <div class="detail-section">
+        <h4>Hands-on Idea</h4>
+        <p>${svc.handsOn}</p>
+        <p><em>Path:</em> ${svc.consolePath}</p>
+        <pre><code>${highlightCode(svc.code)}</code></pre>
+      </div>
+    </div>
+  `;
+      }
+
+      document.querySelectorAll('.tab').forEach((tab) => {
+        tab.onclick = () => {
+          document.querySelectorAll('.tab').forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
           if (tab.dataset.filter === 'Masterclass') {
-            renderGrid('All');
+            renderGrid('All', document.getElementById('searchInput').value);
             document.getElementById('ec2-masterclass').scrollIntoView({ behavior: 'smooth' });
           } else {
-            renderGrid(tab.dataset.filter);
-            const firstCard = document.querySelector('.svc-card');
-            if (firstCard) firstCard.click();
+            renderGrid(tab.dataset.filter, document.getElementById('searchInput').value);
+            const first = document.querySelector('.svc-card');
+            if (first) first.click();
           }
         };
       });
 
-      // Init
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        const activeTab = document.querySelector('.tab.active').dataset.filter;
+        renderGrid(activeTab, e.target.value);
+      });
+
       renderGrid('All');
-      const ec2Data = services.find((s) => s.id === 'ec2');
-      if (ec2Data) {
-        showDetail(ec2Data);
-        // wait for DOM then highlight EC2
-        setTimeout(() => {
-          const cards = document.querySelectorAll('.svc-card');
-          cards.forEach((c) => {
-            if (c.innerHTML.includes('Amazon EC2')) c.classList.add('active');
-          });
-        }, 10);
-      }
+      showDetail(services[0]);
+      setTimeout(() => {
+        const first = document.querySelector('.svc-card');
+        if (first) first.classList.add('active');
+      }, 50);
     </script>
   </body>
 </html>
