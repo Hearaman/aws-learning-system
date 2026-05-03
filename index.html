@@ -349,6 +349,13 @@
           >
             VPC Masterclass
           </button>
+          <button
+            class="tab special"
+            data-filter="Masterclass"
+            onclick="document.getElementById('s3-masterclass').scrollIntoView({ behavior: 'smooth' })"
+          >
+            S3 Masterclass
+          </button>
         </div>
       </div>
     </header>
@@ -508,6 +515,55 @@ resource "aws_subnet" "private_a" { vpc_id = aws_vpc.main.id cidr_block = "10.0.
           </div>
         </div>
       </div>
+
+      <div class="masterclass" id="s3-masterclass">
+        <h2>🎓 S3 Masterclass</h2>
+        <p>Deep dive into Amazon S3 using the same <strong>Node.js User Service</strong> for uploads, static assets, backups, and secure downloads.</p>
+        <div class="mc-grid">
+          <div class="mc-card">
+            <h4>Storage Classes & Core Concepts</h4>
+            <table>
+              <tr><th>Class</th><th>Use</th></tr>
+              <tr><td>Standard</td><td>Frequently accessed files and frontend assets</td></tr>
+              <tr><td>Standard-IA</td><td>Infrequent access with fast retrieval</td></tr>
+              <tr><td>One Zone-IA</td><td>Cheaper but single AZ</td></tr>
+              <tr><td>Glacier / Deep Archive</td><td>Long-term archival and compliance</td></tr>
+            </table>
+            <p><strong>Know for exams:</strong> buckets, objects, prefixes, versioning, lifecycle rules, replication, encryption, and pre-signed URLs.</p>
+          </div>
+          <div class="mc-card">
+            <h4>Security & Access Patterns</h4>
+            <ul>
+              <li>Keep <strong>Block Public Access</strong> enabled by default.</li>
+              <li>Prefer <strong>CloudFront + private bucket</strong> over a public bucket for websites and assets.</li>
+              <li>Use <strong>IAM roles</strong>, bucket policies, and pre-signed URLs for controlled uploads/downloads.</li>
+              <li>Use <strong>SSE-S3</strong> or <strong>SSE-KMS</strong> for encryption at rest.</li>
+              <li>Use <strong>versioning</strong> and <strong>MFA Delete</strong> when recovery matters.</li>
+            </ul>
+          </div>
+          <div class="mc-card">
+            <h4>Hands-On Lab: Node.js Upload Flow</h4>
+            <pre><code><span class="cmt"># Bucket for user avatars</span>
+aws s3api create-bucket --bucket user-service-assets --region us-east-1
+aws s3api put-public-access-block --bucket user-service-assets --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+<span class="cmt"># Node.js app generates a pre-signed upload URL</span>
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3');
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
+const cmd = new PutObjectCommand({ Bucket: 'user-service-assets', Key: 'avatars/u1.png', ContentType: 'image/png' });
+const url = await getSignedUrl(new S3Client({ region: 'us-east-1' }), cmd, { expiresIn: 900 });</code></pre>
+          </div>
+          <div class="mc-card">
+            <h4>Exam Traps</h4>
+            <ul>
+              <li><strong>S3 is regional</strong>, but objects are redundantly stored across multiple AZs within that region.</li>
+              <li><strong>S3 is object storage</strong>, not block storage and not a POSIX file system.</li>
+              <li><strong>Lifecycle rules</strong> move data automatically between storage classes.</li>
+              <li><strong>Versioning</strong> protects from accidental deletes and overwrites.</li>
+              <li><strong>Transfer Acceleration</strong> helps long-distance uploads, while <strong>CloudFront</strong> is for content delivery.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
@@ -607,22 +663,33 @@ resource "aws_subnet" "private_a" { vpc_id = aws_vpc.main.id cidr_block = "10.0.
           layer: 'Storage',
           name: 'Amazon S3',
           icon: '🪣',
-          badges: ['CCP', 'SAA-C03'],
-          useCase: 'Storing user avatars, static assets.',
-          whatItIs: 'Scalable object storage.',
-          whyChoose: 'Infinite scale, 11 9s durability.',
-          decisionShortcut: 'Files, images, backups. Never OS drives.',
-          keyConcepts: 'Buckets, Objects, Lifecycle.',
-          pricing: 'Per GB, requests.',
-          security: 'Block Public Access, IAM.',
-          handsOn: 'Upload via pre-signed URL.',
-          examTips: ['Standard vs IA vs Glacier classes.'],
-          pitfalls: 'Public buckets.',
-          whenNotToUse: 'Block storage (EBS).',
-          limits: '5TB max object size.',
-          consolePath: 'S3 > Buckets',
-          related: ['CloudFront', 'KMS'],
-          code: `resource "aws_s3_bucket" "assets" { bucket = "user-assets" }`,
+          badges: ['CCP', 'SAA-C03', 'Hands-on'],
+          masterclassId: 's3-masterclass',
+          masterclassLabel: 'S3 Masterclass',
+          useCase: 'Storing user avatars, static assets, exported reports, and backups for the Node.js User Service.',
+          whatItIs: 'Amazon S3 is durable, massively scalable object storage for files, media, logs, backups, and data lakes.',
+          whyChoose: 'Choose S3 when you need virtually unlimited storage, eleven 9s durability, event integration, and low-cost lifecycle management.',
+          decisionShortcut: 'Use S3 for files and objects. Do not use it as an EC2 disk or shared POSIX file system.',
+          keyConcepts: 'Buckets, objects, prefixes, storage classes, lifecycle rules, versioning, replication, event notifications, pre-signed URLs, SSE-S3, SSE-KMS.',
+          pricing: 'You pay for storage used, requests, retrieval in some classes, replication, and data transfer out.',
+          security: 'Keep Block Public Access on by default, use IAM and bucket policies carefully, encrypt with SSE-S3 or SSE-KMS, and prefer CloudFront or pre-signed URLs over public buckets.',
+          handsOn: 'Create a private bucket, generate a pre-signed upload URL in Node.js, store avatars under prefixes like avatars/user-123.png, and add a lifecycle rule for old exports.',
+          examTips: ['Standard is for frequent access; IA classes are cheaper for infrequent access.', 'Versioning helps recover from deletes and overwrites.', 'S3 event notifications can trigger Lambda, SQS, or SNS.', 'Transfer Acceleration is for faster uploads over long distances.', 'S3 is regional but data is stored across multiple AZs in that region.'],
+          pitfalls: 'Accidentally exposing buckets, forgetting Block Public Access, or using S3 where block storage or a database is required.',
+          whenNotToUse: 'Do not use S3 for low-latency block storage, operating system disks, relational queries, or a shared Linux file system.',
+          limits: '5 TB max object size, 100 buckets per account by default, and multipart upload is required for very large objects.',
+          consolePath: 'S3 > Buckets > Create bucket / Permissions / Management',
+          related: ['CloudFront', 'Lambda', 'KMS', 'SNS', 'SQS'],
+          code: `resource "aws_s3_bucket" "assets" {
+  bucket = "user-service-assets"
+}
+resource "aws_s3_bucket_public_access_block" "assets" {
+  bucket                  = aws_s3_bucket.assets.id
+  block_public_acls       = true
+  ignore_public_acls      = true
+  block_public_policy     = true
+  restrict_public_buckets = true
+}`,
         },
         {
           id: 'ebs',
